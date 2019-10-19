@@ -1,6 +1,5 @@
 package expression;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ public class Helper {
 
 
   enum Operator {
-    ADD("+"), SUBTRACT("-"), MULTIPLY("*");
+    ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/");
 
     // declaring private variable for getting values
     private String operator;
@@ -33,19 +32,13 @@ public class Helper {
   // A utility function to check if 'c'
   // is a valid operator.
   protected boolean isOperator(String c) {
-    if (c.equals(Operator.ADD.getOperator()) || c.equals(Operator.SUBTRACT.getOperator())
-            || c.equals(Operator.MULTIPLY.getOperator())) {
-      return true;
-    }
-    return false;
+    return c.equals(Operator.ADD.getOperator()) || c.equals(Operator.SUBTRACT.getOperator())
+            || c.equals(Operator.MULTIPLY.getOperator()) || c.equals(Operator.DIVIDE.getOperator());
   }
 
   // for checking the validity of the postfix expr
   protected boolean isValidExpr(String expr) {
-    if (!(expr.equals("") || expr.equals(null) || expr.equals(" ")))
-      return true;
-    else
-      return false;
+    return !(expr == null || expr.isBlank()  || expr.isEmpty()|| expr.equals(" "));
   }
 
   // evaluate the expression
@@ -68,29 +61,35 @@ public class Helper {
         return left_val + right_val;
       case "-":
         return left_val - right_val;
-      case "/":
+      case "*":
         return left_val * right_val;
-      default:
+      case "/":
         return left_val / right_val;
+      default:
+        throw new IllegalArgumentException("Invalid expression");
     }
   }
 
   // Utility function to do inorder traversal
   protected List inOrder(TreeNode root,List infixExpr) {
-    /**
-     * IMPLEMENTATION OF INFIX STARTING FROM THE RIGHT SUB TREE right-root-left
-     */
     if (root == null)
       return infixExpr;
 
-    /* first recur on left child */
+    if(!(root.left==null && root.right==null))
+      infixExpr.add("(");
+
+    /* first recur on right child */
     inOrder(root.right,infixExpr);
+
 
     /* then print the data of node */
     infixExpr.add(root.value);
 
-    /* now recur on right child */
+
+    /* now recur on left child */
     inOrder(root.left,infixExpr);
+    if(!(root.left==null && root.right==null))
+      infixExpr.add(")");
     return infixExpr;
   }
 
@@ -98,14 +97,18 @@ public class Helper {
   protected List preOrder(TreeNode root, List prefixExpr) {
     if (root == null)
       return prefixExpr;
-
+    if(!(root.left==null && root.right==null))
+      prefixExpr.add("(");
     /* first print data of node */
     prefixExpr.add(root.value);
-    /* then recur on left sutree */
+    /* then recur on left subtree */
     preOrder(root.left,prefixExpr);
 
     /* now recur on right subtree */
     preOrder(root.right,prefixExpr);
+    if(!(root.left==null && root.right==null))
+      prefixExpr.add(")");
     return prefixExpr;
   }
+
 }

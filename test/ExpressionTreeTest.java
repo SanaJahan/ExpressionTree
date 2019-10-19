@@ -74,11 +74,11 @@ public class ExpressionTreeTest {
     postfixExpr = new ExpressionTree(" 3    5   + 4 - ");
 
     assertEquals(4.0,postfixExpr.evaluate(),6);
-    String expected = "( 4 - ( 3 + 5 ) )";
+    String expected = "( 4 - ( 5 + 3 ) )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
-    String schemeExpr = "(- (+ 4 5))";
+    String schemeExpr = "(- (+ 3 5) 4)";
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
   }
 
@@ -87,7 +87,7 @@ public class ExpressionTreeTest {
   public void shouldHandlePostfixExprWithOneOperatorTwoOperand() {
     postfixExpr = new ExpressionTree("2 5 + ");
 
-    String expected = "( 2 + 5 )";
+    String expected = "( 5 + 2 )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
@@ -117,7 +117,7 @@ public class ExpressionTreeTest {
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
 
     //infix expression
-    String expected = "( -4.5 + ( 1.2 * 5.4 ) )";
+    String expected = "( -4.5 + ( 5.4 * 1.2 ) )";
     assertEquals(expected, postfixExpr.infix());
   }
 
@@ -126,7 +126,7 @@ public class ExpressionTreeTest {
   public void shouldHandleExprWithAllOperators() {
     postfixExpr = new ExpressionTree(" 4 5 + 2 * 6 /");
 
-    String expected = "( 6 / ( 2 * ( 4 + 5 ) ) )";
+    String expected = "( 6 / ( 2 * ( 5 + 4 ) ) )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
