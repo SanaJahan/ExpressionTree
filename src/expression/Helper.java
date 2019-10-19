@@ -1,5 +1,7 @@
 package expression;
 
+import java.util.ArrayList;
+
 /**
  * Helper class that implements all the helper methods for the expresion tree.
  */
@@ -38,11 +40,50 @@ public class Helper {
   }
 
   // for checking the validity of the postfix expr
-  // empty string
-// null
-  // space only
-  // space with only one operand and no sign
- protected boolean isValidExpr(String expr) {
-    return true;
- }
+  protected boolean isValidExpr(String expr) {
+    if (!(expr.equals("") || expr.equals(null) || expr.equals(" ")))
+      return true;
+    else
+      return false;
+  }
+
+  // evaluate the expression
+  public double calculate(TreeNode root) {
+    // empty tree
+    if (root == null)
+      return 0;
+    // leaf node i.e, an integer
+    if (root.left == null && root.right == null)
+      return Double.parseDouble(root.value);
+
+    // Evaluate left subtree
+    double left_val = calculate(root.left);
+
+    // Evaluate right subtree
+    double right_val = calculate(root.right);
+
+    switch (root.value) {
+      case "+":
+        return left_val + right_val;
+      case "-":
+        return left_val - right_val;
+      case "/":
+        return left_val * right_val;
+      default:
+        return left_val / right_val;
+    }
+  }
+
+  // Utility function to do inorder traversal
+  protected String inOrder(TreeNode root) {
+    /**
+     * IMPLEMENTATION OF INFIX STARTING FROM THE RIGHT SUB TREE
+     */
+    return root.toString();
+  }
+
+  // UTILITY FUNCTION TO DO PRE-ORDER TRAVERSAL
+  protected String preOrder(TreeNode root) {
+    return root.toString();
+  }
 }

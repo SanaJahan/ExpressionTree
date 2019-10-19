@@ -41,6 +41,7 @@ public class ExpressionTreeTest {
   @Test
   public void shouldHandleOneOperand() {
     postfixExpr = new ExpressionTree(" 4");
+    assertEquals(4,postfixExpr.evaluate(),6);
   }
 
   // space with only one operand and no sign
@@ -72,6 +73,7 @@ public class ExpressionTreeTest {
   public void shouldHandleValidPostfixWithSpaces() {
     postfixExpr = new ExpressionTree(" 3    5   + 4 - ");
 
+    assertEquals(4.0,postfixExpr.evaluate(),6);
     String expected = "( 4 - ( 3 + 5 ) )";
     assertEquals(expected, postfixExpr.infix());
 

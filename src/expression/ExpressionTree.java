@@ -27,7 +27,7 @@ public class ExpressionTree implements Expression {
       helper = new Helper();
       // Traverse through every character of
       // input expression
-      for (String op : postfixExpr.split("\\s+")) {
+      for (String op : postfixExpr.trim().split("\\s+")) {
         // If operand, simply push into stack
         if (!helper.isOperator(op)) {
           node = new TreeNode(op);
@@ -61,16 +61,16 @@ public class ExpressionTree implements Expression {
 
   @Override
   public double evaluate() {
-    return 0;
+    return helper.calculate(root);
   }
 
   @Override
   public String infix() {
-    return null;
+  return helper.inOrder(root);
   }
 
   @Override
   public String schemeExpression() {
-    return null;
+    return helper.preOrder(root);
   }
 }
