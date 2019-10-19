@@ -1,6 +1,7 @@
 package expression;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Helper class that implements all the helper methods for the expresion tree.
@@ -75,15 +76,36 @@ public class Helper {
   }
 
   // Utility function to do inorder traversal
-  protected String inOrder(TreeNode root) {
+  protected List inOrder(TreeNode root,List infixExpr) {
     /**
-     * IMPLEMENTATION OF INFIX STARTING FROM THE RIGHT SUB TREE
+     * IMPLEMENTATION OF INFIX STARTING FROM THE RIGHT SUB TREE right-root-left
      */
-    return root.toString();
+    if (root == null)
+      return infixExpr;
+
+    /* first recur on left child */
+    inOrder(root.right,infixExpr);
+
+    /* then print the data of node */
+    infixExpr.add(root.value);
+
+    /* now recur on right child */
+    inOrder(root.left,infixExpr);
+    return infixExpr;
   }
 
-  // UTILITY FUNCTION TO DO PRE-ORDER TRAVERSAL
-  protected String preOrder(TreeNode root) {
-    return root.toString();
+  // UTILITY FUNCTION TO DO PRE-ORDER TRAVERSAL root-right-left
+  protected List preOrder(TreeNode root, List prefixExpr) {
+    if (root == null)
+      return prefixExpr;
+
+    /* first print data of node */
+    prefixExpr.add(root.value);
+    /* then recur on left sutree */
+    preOrder(root.left,prefixExpr);
+
+    /* now recur on right subtree */
+    preOrder(root.right,prefixExpr);
+    return prefixExpr;
   }
 }

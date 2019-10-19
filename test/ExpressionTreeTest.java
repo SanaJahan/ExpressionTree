@@ -110,12 +110,15 @@ public class ExpressionTreeTest {
   // a perfect postfix expr
   @Test
   public void shouldHandleValidPostfixExpr() {
-    String expected = "( -4.5 + ( 1.2 * 5.4 ) )";
-    assertEquals(expected, postfixExpr.infix());
+
 
     // scheme expression
     String schemeExpr = "(+ (* 1.2 5.4) -4.5)";
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
+
+    //infix expression
+    String expected = "( -4.5 + ( 1.2 * 5.4 ) )";
+    assertEquals(expected, postfixExpr.infix());
   }
 
   // postfix expr with divide

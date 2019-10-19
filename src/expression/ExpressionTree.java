@@ -1,7 +1,10 @@
 package expression;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * This class represents the expression as a tree.
@@ -66,11 +69,17 @@ public class ExpressionTree implements Expression {
 
   @Override
   public String infix() {
-  return helper.inOrder(root);
+    List<String> infixExpr = new ArrayList<>();
+  return Arrays.asList(helper.inOrder(root,infixExpr)).stream()
+          .map(Object::toString)
+          .collect(Collectors.joining(" "));
   }
 
   @Override
   public String schemeExpression() {
-    return helper.preOrder(root);
+    List<String> prefixExpr = new ArrayList<>();
+    return Arrays.asList(helper.preOrder(root,prefixExpr)).stream()
+            .map(Object::toString)
+            .collect(Collectors.joining(" "));
   }
 }
