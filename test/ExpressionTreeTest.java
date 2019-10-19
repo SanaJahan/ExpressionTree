@@ -1,8 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.stream.Stream;
-
 import expression.Expression;
 import expression.ExpressionTree;
 
@@ -40,13 +38,13 @@ public class ExpressionTreeTest {
   }
 
   // space with only one operand and no sign
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void shouldHandleOneOperand() {
     postfixExpr = new ExpressionTree(" 4");
   }
 
   // space with only one operand and no sign
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void shouldHandleOneNegativeOperand() {
     postfixExpr = new ExpressionTree(" -4");
   }
