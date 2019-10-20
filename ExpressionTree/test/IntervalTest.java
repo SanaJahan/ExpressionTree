@@ -6,6 +6,7 @@ import intervals.Interval;
 import intervals.Intervals;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This is the tester class that contains the test cases for the Interval Tree class.
@@ -161,6 +162,53 @@ public class IntervalTest {
 
     assertEquals(expectedOutput,actualOutput);
     System.out.println(actualOutput);
+  }
 
+  @Test
+  public void equalsTestOne() {
+    Interval intervalOne = new Interval(4,5);
+    Interval intervalTwo = new Interval(4,5);
+
+    boolean actualOutput = intervalOne.equals(intervalTwo);
+    boolean expectedOutput = true;
+
+    assertEquals(expectedOutput,actualOutput);
+    System.out.println(actualOutput);
+  }
+
+  @Test
+  public void equalsTestTwo() {
+    Interval intervalOne = new Interval(4,5);
+    Interval intervalTwo = new Interval(4,5);
+
+    boolean actualOutput = intervalTwo.equals(intervalOne);
+    boolean expectedOutput = true;
+
+    assertEquals(expectedOutput,actualOutput);
+    System.out.println(actualOutput);
+  }
+
+  @Test
+  public void equalsTestThree() {
+    Interval intervalOne = new Interval(4,5);
+    Interval intervalTwo = new Interval(4,7);
+
+    boolean actualOutput = intervalOne.equals(intervalTwo);
+    boolean expectedOutput = false;
+
+    assertEquals(expectedOutput,actualOutput);
+    System.out.println(actualOutput);
+  }
+
+  @Test
+  public void equalsTestFour() {
+    Interval intervalOne = new Interval(3,5);
+    Interval intervalTwo = new Interval(4,7);
+
+    boolean actualOutput = intervalTwo.equals(intervalOne);
+    boolean expectedOutput = false;
+
+    assertEquals(expectedOutput,actualOutput);
+    System.out.println(actualOutput);
   }
 }
