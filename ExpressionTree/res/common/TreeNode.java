@@ -1,4 +1,4 @@
-package intervals;
+package common;
 /**
  * Representing a single node in the expression tree.
  */

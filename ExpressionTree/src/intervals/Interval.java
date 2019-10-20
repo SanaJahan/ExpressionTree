@@ -2,15 +2,16 @@ package intervals;
 
 import java.util.Objects;
 
-import res.AbstractExpressionTreeClass;
-import res.ExpressionTreeHelper;
+import common.AbstractExpressionTree;
+import common.ExpressionTreeHelper;
+import common.TreeNode;
 
 /**
  * This class represents a 1-dimensional interval. The interval is
  * characterized by a start and an end, both integral values.
  */
-public class Interval extends AbstractExpressionTreeClass implements Intervals{
-  int start,end;
+public class Interval extends AbstractExpressionTree implements Intervals{
+  private int start,end;
   private TreeNode root;
   public ExpressionTreeHelper helper = new ExpressionTreeHelper();
 

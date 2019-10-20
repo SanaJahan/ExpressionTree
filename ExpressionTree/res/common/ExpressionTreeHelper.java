@@ -1,15 +1,14 @@
-package res;
+package common;
 
 import java.util.List;
 
 import intervals.Interval;
-import intervals.TreeNode;
 
 /**
  * This class contains all the helper methods required to implement an Expression tree,
  * and an interval tree.
  */
-public class ExpressionTreeHelper extends AbstractExpressionTreeClass {
+public class ExpressionTreeHelper extends AbstractExpressionTree {
   enum Operator {
     ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/"), INTERSECTION("I"), UNION("U");
 
@@ -29,24 +28,6 @@ public class ExpressionTreeHelper extends AbstractExpressionTreeClass {
     Operator(String operator) {
       this.operator = operator;
     }
-  }
-
-  /**
-   * isOperator checks if the current node value is an operator string.
-   * @param c Can be either of the enumerations.
-   * @return True or False.
-   */
-  protected boolean isOperator(String c) {
-    return super.isOperator(c);
-  }
-
-  /**
-   * Checks is the current expression string is valid or not.
-   * @param expr The postfix expression string.
-   * @return True or False.
-   */
-  protected boolean isValidExpr(String expr) {
-    return super.isValidExpr(expr);
   }
 
   /**

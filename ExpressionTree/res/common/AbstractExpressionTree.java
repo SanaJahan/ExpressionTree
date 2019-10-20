@@ -1,10 +1,8 @@
-package res;
+package common;
 
 import java.util.Stack;
 
-import intervals.TreeNode;
-
-public class AbstractExpressionTreeClass {
+public class AbstractExpressionTree {
   ExpressionTreeHelper helper;
 
   protected TreeNode constructTree(String postfixExpr) {
