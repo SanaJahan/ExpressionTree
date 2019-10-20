@@ -23,15 +23,12 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
    * accordingly.
    */
   public ExpressionTree(String postfixExpr) {
-    if(super.isValidExpr(postfixExpr)){
+    if (super.isValidExpr(postfixExpr)) {
       root = super.postOrderTraversal(postfixExpr);
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Invalid expression");
     }
   }
-
-
 
 
   @Override
@@ -43,19 +40,24 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
   public String infix() {
     List<String> infixExpr = new ArrayList<>();
 
-    Collection<String> s = Collections.singleton(Arrays.asList(helper.inOrder(root, infixExpr)).stream()
-            .map(Object::toString)
-            .collect(Collectors.joining(" ")).replace(",", ""));
-    return s.toString().replace("[", "").replace("]", "");
+    Collection<String> s = getInfixExprList(helper.inOrder(root, infixExpr));
+    return s.toString().replace("[", "")
+            .replace("]", "");
   }
-
 
   @Override
   public String schemeExpression() {
     List<String> prefixExpr = new ArrayList<>();
-    Collection<String> s = Collections.singleton(Arrays.asList(helper.preOrder(root, prefixExpr)).stream()
+    Collection<String> s = getInfixExprList(helper.preOrder(root, prefixExpr));
+    return s.toString().replace("[", "")
+            .replace("]", "")
+            .replace("( ", "(")
+            .replace(" )", ")");
+  }
+
+  private Collection<String> getInfixExprList(List list) {
+    return Collections.singleton(Arrays.asList(list).stream()
             .map(Object::toString)
             .collect(Collectors.joining(" ")).replace(",", ""));
-    return s.toString().replace("[", "").replace("]", "").replace("( ", "(").replace(" )", ")");
   }
 }
