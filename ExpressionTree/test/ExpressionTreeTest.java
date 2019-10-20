@@ -41,6 +41,7 @@ public class ExpressionTreeTest {
   @Test
   public void shouldHandleOneOperand() {
     postfixExpr = new ExpressionTree(" 4");
+    assertEquals(4,postfixExpr.evaluate(),6);
   }
 
   // space with only one operand and no sign
@@ -72,11 +73,12 @@ public class ExpressionTreeTest {
   public void shouldHandleValidPostfixWithSpaces() {
     postfixExpr = new ExpressionTree(" 3    5   + 4 - ");
 
-    String expected = "( 4 - ( 3 + 5 ) )";
+    assertEquals(4.0,postfixExpr.evaluate(),6);
+    String expected = "( 4 - ( 5 + 3 ) )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
-    String schemeExpr = "(- (+ 4 5))";
+    String schemeExpr = "(- (+ 3 5) 4)";
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
   }
 
@@ -85,7 +87,7 @@ public class ExpressionTreeTest {
   public void shouldHandlePostfixExprWithOneOperatorTwoOperand() {
     postfixExpr = new ExpressionTree("2 5 + ");
 
-    String expected = "( 2 + 5 )";
+    String expected = "( 5 + 2 )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
@@ -97,6 +99,7 @@ public class ExpressionTreeTest {
   @Test(expected = IllegalArgumentException.class)
   public void shouldHandleOneOperatorAndThreeOperand() {
     postfixExpr = new ExpressionTree(" 2 5 3 + ");
+    postfixExpr.evaluate();
   }
 
   // a postfix with 2 operators and one operand
@@ -108,12 +111,18 @@ public class ExpressionTreeTest {
   // a perfect postfix expr
   @Test
   public void shouldHandleValidPostfixExpr() {
-    String expected = "( -4.5 + ( 1.2 * 5.4 ) )";
-    assertEquals(expected, postfixExpr.infix());
+
 
     // scheme expression
     String schemeExpr = "(+ (* 1.2 5.4) -4.5)";
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
+
+    //infix expression
+    String expected = "( -4.5 + ( 5.4 * 1.2 ) )";
+    assertEquals(expected, postfixExpr.infix());
+
+    //evaluate postfix expression
+    assertEquals(1.9800000000000004,postfixExpr.evaluate(),0);
   }
 
   // postfix expr with divide
@@ -121,12 +130,15 @@ public class ExpressionTreeTest {
   public void shouldHandleExprWithAllOperators() {
     postfixExpr = new ExpressionTree(" 4 5 + 2 * 6 /");
 
-    String expected = "( 6 / ( 2 * ( 4 + 5 ) ) )";
+    assertEquals(3.0, postfixExpr.evaluate(),0);
+
+    String expected = "( 6 / ( 2 * ( 5 + 4 ) ) )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
     String schemeExpr = "(/ (* (+ 4 5) 2) 6)";
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
+
   }
 
 
