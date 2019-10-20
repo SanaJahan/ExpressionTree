@@ -74,7 +74,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(1,2);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -90,7 +89,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(3,4);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
   }
 
   @Test
@@ -100,7 +98,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(-1,4);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
   }
 
   @Test
@@ -110,7 +107,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(3,7);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
   }
 
   @Test
@@ -120,7 +116,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(4,4);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -149,7 +144,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(5,12);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
 
   }
 
@@ -160,7 +154,6 @@ public class IntervalTest {
     Interval expectedOutput = new Interval(5,4);
 
     assertEquals(expectedOutput,actualOutput);
-    System.out.println(actualOutput);
 
   }
 }
