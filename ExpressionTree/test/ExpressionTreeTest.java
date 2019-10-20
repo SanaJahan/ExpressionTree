@@ -99,6 +99,7 @@ public class ExpressionTreeTest {
   @Test(expected = IllegalArgumentException.class)
   public void shouldHandleOneOperatorAndThreeOperand() {
     postfixExpr = new ExpressionTree(" 2 5 3 + ");
+    postfixExpr.evaluate();
   }
 
   // a postfix with 2 operators and one operand

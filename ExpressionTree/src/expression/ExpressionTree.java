@@ -23,8 +23,8 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
    * accordingly.
    */
   public ExpressionTree(String postfixExpr) {
-    if(helper.isValidExpr(postfixExpr)){
-      root = constructTree(postfixExpr);
+    if(super.isValidExpr(postfixExpr)){
+      root = super.postOrderTraversal(postfixExpr);
     }
     else {
       throw new IllegalArgumentException("Invalid expression");
@@ -32,9 +32,6 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
   }
 
 
-  private TreeNode constructTree(String postfixExpr) throws IllegalArgumentException {
-    return super.postOrderTraversal(postfixExpr);
-  }
 
 
   @Override

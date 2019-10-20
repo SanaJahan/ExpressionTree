@@ -6,7 +6,9 @@ import intervals.Interval;
 import intervals.Intervals;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * This is the tester class that contains the test cases for the Interval Tree class.
@@ -158,46 +160,67 @@ public class IntervalTest {
   }
 
   @Test
-  public void equalsTestOne() {
+  public void equalsSymmetryTrueOne() {
     Interval intervalOne = new Interval(4,5);
     Interval intervalTwo = new Interval(4,5);
 
     boolean actualOutput = intervalOne.equals(intervalTwo);
-    boolean expectedOutput = true;
 
-    assertEquals(expectedOutput,actualOutput);
+    assertTrue(actualOutput);
   }
 
   @Test
-  public void equalsTestTwo() {
+  public void equalsSymmetryTrueTwo() {
     Interval intervalOne = new Interval(4,5);
     Interval intervalTwo = new Interval(4,5);
 
     boolean actualOutput = intervalTwo.equals(intervalOne);
-    boolean expectedOutput = true;
-    assertEquals(expectedOutput,actualOutput);
+    assertTrue(actualOutput);
   }
 
   @Test
-  public void equalsTestThree() {
+  public void equalsSymmetryFalseOne() {
     Interval intervalOne = new Interval(4,5);
     Interval intervalTwo = new Interval(4,7);
 
     boolean actualOutput = intervalOne.equals(intervalTwo);
-    boolean expectedOutput = false;
 
-    assertEquals(expectedOutput,actualOutput);
+    assertFalse(actualOutput);
   }
 
   @Test
-  public void equalsTestFour() {
+  public void equalsTestFalseTwo() {
     Interval intervalOne = new Interval(3,5);
     Interval intervalTwo = new Interval(4,7);
 
     boolean actualOutput = intervalTwo.equals(intervalOne);
-    boolean expectedOutput = false;
 
-    assertEquals(expectedOutput,actualOutput);
+    assertFalse(actualOutput);
 
   }
+
+  @Test
+  public void equalsReflectivity() {
+    Interval intervalOne = new Interval(3,5);
+
+    boolean actualOutput = intervalOne.equals(intervalOne);
+    assertTrue(actualOutput);
+  }
+
+  @Test
+  public void equalsTransitivity() {
+    Interval intervalOne = new Interval(3,5);
+    Interval intervalTwo = new Interval(3,5);
+    Interval intervalThree = new Interval(3,5);
+
+    boolean actualOutput1 = intervalOne.equals(intervalTwo);
+    boolean actualOutput2 = intervalTwo.equals(intervalThree);
+    boolean actualOutput3 = intervalOne.equals(intervalThree);
+
+    assertTrue(actualOutput1);
+    assertTrue(actualOutput2);
+    assertTrue(actualOutput3);
+
+  }
+
 }

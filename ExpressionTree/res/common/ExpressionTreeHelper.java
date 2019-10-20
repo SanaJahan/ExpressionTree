@@ -1,82 +1,121 @@
 package common;
 
 import java.util.List;
-import java.util.Optional;
 
 import intervals.Interval;
 
-
 /**
- * Helper class that implements all the helper methods for the expresion tree.
+ * This class contains all the helper methods required to implement an Expression tree,
+ * and an interval tree.
  */
-public class ExpressionTreeHelper {
+public class ExpressionTreeHelper extends AbstractExpressionTree {
+  enum Operator {
+    ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/"), INTERSECTION("I"), UNION("U");
 
-    protected enum Operator {
-      ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/"), INTERSECTION("I"), UNION("U");
+    // declaring private variable for getting values
+    private String operator;
 
-      // declaring private variable for getting values
-      private String operator;
-
-      /**
-       * gives the symbol for the operand.
-       *
-       * @return the character associated with the enum.
-       */
-      public String getOperator() {
-        return this.operator;
-      }
-
-      // enum constructor
-      Operator(String operator) {
-        this.operator = operator;
-      }
+    /**
+     * gives the symbol for the operand.
+     *
+     * @return the character associated with the enum.
+     */
+    public String getOperator() {
+      return this.operator;
     }
 
-    // A utility function to check if 'c'
-    // is a valid operator.
-    public boolean isOperator(String c) {
-      return c.equals(Operator.ADD.getOperator()) || c.equals(Operator.SUBTRACT.getOperator())
-              || c.equals(Operator.MULTIPLY.getOperator()) ||
-              c.equals(Operator.DIVIDE.getOperator()) ||
-              c.equals(Operator.UNION.getOperator()) || c.equals(Operator.INTERSECTION.getOperator());
+    // enum constructor
+    Operator(String operator) {
+      this.operator = operator;
     }
-
-    // for checking the validity of the postfix expr
-    public boolean isValidExpr(String expr) {
-      return !(expr == null || expr.isBlank()  || expr.isEmpty()|| expr.equals(" "));
-    }
-
-    // evaluate the expression
-    public double calculate(TreeNode root) {
-      // empty tree
-      if (root == null)
-        return 0;
-      // leaf node i.e, an integer
-      if (root.left == null && root.right == null)
-        return Double.parseDouble(root.value);
-
-      // Evaluate left subtree
-      double left_val = calculate(root.left);
-
-      // Evaluate right subtree
-      double right_val = calculate(root.right);
-
-      switch (root.value) {
-        case "+":
-          return left_val + right_val;
-        case "-":
-          return left_val - right_val;
-        case "*":
-          return left_val * right_val;
-        case "/":
-          return left_val / right_val;
-        default:
-          throw new IllegalArgumentException("Invalid expression");
-      }
-    }
+  }
 
   /**
-   * This helper method performs the evaluation of the tree.
+   * This calculate method is for evaluating an Expression tree.
+   * @param root This is the current root of the tree or sub tree considered.
+   * @return The double precision value result of the computation.
+   */
+  public double calculate(TreeNode root) {
+    // empty tree
+    if (root == null)
+      return 0;
+    // leaf node i.e, an integer
+    if (root.left == null && root.right == null)
+      return Double.parseDouble(root.value);
+
+    // Evaluate left subtree
+    double left_val = calculate(root.left);
+
+    // Evaluate right subtree
+    double right_val = calculate(root.right);
+
+    switch (root.value) {
+      case "+":
+        return left_val + right_val;
+      case "-":
+        return left_val - right_val;
+      case "*":
+        return left_val * right_val;
+      case "/":
+        return left_val / right_val;
+      default:
+        throw new IllegalArgumentException("Invalid expression");
+    }
+  }
+
+  /**
+   * This is a utility function for performing inorder traversal on the Expression tree.
+   * @param root The current root of the tree or subtree considered.
+   * @param infixExpr The infix expression.
+   * @return A list of the nodes added during the inorder traversal.
+   */
+  public List inOrder(TreeNode root, List infixExpr) {
+    if (root == null)
+      return infixExpr;
+
+    if(!(root.left==null && root.right==null))
+      infixExpr.add("(");
+
+    /* first recur on right child */
+    inOrder(root.right,infixExpr);
+
+
+    /* then print the data of node */
+    infixExpr.add(root.value);
+
+
+    /* now recur on left child */
+    inOrder(root.left,infixExpr);
+    if(!(root.left==null && root.right==null))
+      infixExpr.add(")");
+    return infixExpr;
+  }
+
+  /**
+   * This is a utility function for performing preorder traversal on the Expression tree.
+   * @param root The current root of the tree or subtree considered.
+   * @param prefixExpr The prefix expression.
+   * @return A list of the nodes added during the preorder traversal.
+   */
+  public List preOrder(TreeNode root, List prefixExpr) {
+    if (root == null)
+      return prefixExpr;
+    if(!(root.left==null && root.right==null))
+      prefixExpr.add("(");
+    /* first print data of node */
+    prefixExpr.add(root.value);
+    /* then recur on left subtree */
+    preOrder(root.left,prefixExpr);
+
+    /* now recur on right subtree */
+    preOrder(root.right,prefixExpr);
+    if(!(root.left==null && root.right==null))
+      prefixExpr.add(")");
+    return prefixExpr;
+  }
+
+  /**
+   * This helper method performs the evaluation of the Interval tree.
    * @param root This is the current root in the tree or subtree considered.
    * @return The calculated Interval after Intersection or Union operation.
    * @throws IllegalArgumentException Thrown if the interval or operator are invalid.
@@ -115,45 +154,4 @@ public class ExpressionTreeHelper {
         throw new IllegalArgumentException();
     }
   }
-    // Utility function to do inorder traversal
-    public List inOrder(TreeNode root, List infixExpr) {
-      if (root == null)
-        return infixExpr;
-
-      if(!(root.left==null && root.right==null))
-        infixExpr.add("(");
-
-      /* first recur on right child */
-      inOrder(root.right,infixExpr);
-
-
-      /* then print the data of node */
-      infixExpr.add(root.value);
-
-
-      /* now recur on left child */
-      inOrder(root.left,infixExpr);
-      if(!(root.left==null && root.right==null))
-        infixExpr.add(")");
-      return infixExpr;
-    }
-
-    // UTILITY FUNCTION TO DO PRE-ORDER TRAVERSAL root-right-left
-    public List preOrder(TreeNode root, List prefixExpr) {
-      if (root == null)
-        return prefixExpr;
-      if(!(root.left==null && root.right==null))
-        prefixExpr.add("(");
-      /* first print data of node */
-      prefixExpr.add(root.value);
-      /* then recur on left subtree */
-      preOrder(root.left,prefixExpr);
-
-      /* now recur on right subtree */
-      preOrder(root.right,prefixExpr);
-      if(!(root.left==null && root.right==null))
-        prefixExpr.add(")");
-      return prefixExpr;
-    }
-
 }

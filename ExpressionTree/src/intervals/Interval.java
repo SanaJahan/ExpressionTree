@@ -1,20 +1,19 @@
 package intervals;
 
+import java.util.Objects;
+
 import common.AbstractExpressionTree;
 import common.ExpressionTreeHelper;
 import common.TreeNode;
-
-import java.util.Objects;
-import java.util.Stack;
 
 /**
  * This class represents a 1-dimensional interval. The interval is
  * characterized by a start and an end, both integral values.
  */
 public class Interval extends AbstractExpressionTree implements Intervals{
-  int start,end;
+  private int start,end;
   private TreeNode root;
-  private ExpressionTreeHelper helper = new ExpressionTreeHelper();
+  public ExpressionTreeHelper helper = new ExpressionTreeHelper();
 
   /**
    * Construct an interval given its start and end values.
@@ -35,13 +34,10 @@ public class Interval extends AbstractExpressionTree implements Intervals{
    * parses it and constructs the Interval Tree.
    * @param postfixExpr The postfix expression taken as a string.
    */
-  public Interval(String postfixExpr) {
-    if (helper.isValidExpr(postfixExpr)) {
-      root = super.postOrderTraversal(postfixExpr);
-    } else {
-      throw new IllegalArgumentException("Invalid expression");
-    }
+  public Interval(String postfixExpr) throws IllegalArgumentException {
+    root = super.postOrderTraversal(postfixExpr);
   }
+
 
   /**
    * Compute and return an interval that represents the intersection of this
