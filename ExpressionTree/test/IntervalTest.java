@@ -6,7 +6,7 @@ import intervals.Interval;
 import intervals.Intervals;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 /**
  * This is the tester class that contains the test cases for the Interval Tree class.

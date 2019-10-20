@@ -1,16 +1,18 @@
 package intervals;
 
 import java.util.Objects;
-import java.util.Stack;
+
+import res.AbstractExpressionTreeClass;
+import res.ExpressionTreeHelper;
 
 /**
  * This class represents a 1-dimensional interval. The interval is
  * characterized by a start and an end, both integral values.
  */
-public class Interval implements Intervals{
+public class Interval extends AbstractExpressionTreeClass implements Intervals{
   int start,end;
   private TreeNode root;
-  private IntervalOperationHelper helper;
+  public ExpressionTreeHelper helper = new ExpressionTreeHelper();
 
   /**
    * Construct an interval given its start and end values.
@@ -31,54 +33,10 @@ public class Interval implements Intervals{
    * parses it and constructs the Interval Tree.
    * @param postfixExpr The postfix expression taken as a string.
    */
-  public Interval(String postfixExpr) {
-      root = constructTree(postfixExpr);
+  public Interval(String postfixExpr) throws IllegalArgumentException {
+      root = super.constructTree(postfixExpr);
   }
 
-  /**
-   * This is a private method that constructs the Interval Tree using TreeNode class and a stack.
-   * @param postfixExpr the postfix expression taken as string
-   * @return A TreeNode object is returned.
-   * @throws IllegalArgumentException Thrown if the expression is invalid.
-   */
-  private TreeNode constructTree(String postfixExpr) throws IllegalArgumentException {
-    try {
-      Stack<TreeNode> stack = new Stack();
-      TreeNode node, leftNode, rightNode;
-      helper = new IntervalOperationHelper();
-      // Traverse through every character of
-      // input expression
-      if (helper.isValidExpr(postfixExpr)) {
-        for (String op : postfixExpr.trim().replaceAll("\\s+,",",").split("\\s+")) {
-          // If operand, simply push into stack
-          if (!helper.isOperator(op)) {
-            node = new TreeNode(op);
-            stack.push(node);
-          } else { // operator
-            node = new TreeNode(op);
-            // Pop two top nodes
-            // Store top
-            rightNode = stack.pop();      // Remove top
-            leftNode = stack.pop();
-            //  make them children
-            node.right = rightNode;
-            node.left = leftNode;
-            // Add this subexpression to stack
-            stack.push(node);
-          }
-        }
-        //  only element will be root of expression
-        // tree
-      }
-      node = stack.peek();
-      stack.pop();
-
-      return node;
-    }
-    catch (Exception e) {
-      throw new IllegalArgumentException("Invalid expression");
-    }
-  }
 
   /**
    * Compute and return an interval that represents the intersection of this
@@ -115,7 +73,7 @@ public class Interval implements Intervals{
    */
   @Override
   public Interval evaluate() {
-    return helper.calculate(root);
+    return helper.calculateInterval(root);
   }
 
   /**
