@@ -119,6 +119,9 @@ public class ExpressionTreeTest {
     //infix expression
     String expected = "( -4.5 + ( 5.4 * 1.2 ) )";
     assertEquals(expected, postfixExpr.infix());
+
+    //evaluate postfix expression
+    assertEquals(1.9800000000000004,postfixExpr.evaluate(),0);
   }
 
   // postfix expr with divide
@@ -126,12 +129,15 @@ public class ExpressionTreeTest {
   public void shouldHandleExprWithAllOperators() {
     postfixExpr = new ExpressionTree(" 4 5 + 2 * 6 /");
 
+    assertEquals(3.0, postfixExpr.evaluate(),0);
+
     String expected = "( 6 / ( 2 * ( 5 + 4 ) ) )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
     String schemeExpr = "(/ (* (+ 4 5) 2) 6)";
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
+
   }
 
 
