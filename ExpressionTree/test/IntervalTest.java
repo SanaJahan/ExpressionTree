@@ -254,4 +254,14 @@ public class IntervalTest {
     assertEquals(expectedOutput,actualOutput);
   }
 
+  @Test
+  public void treeTestThree() {
+    expr = new Interval("1,2 3,4 4,6 U 3,5 I U");
+    expr.textTree();
+    String actualOutput = expr.textTree();
+    //Have not given the expected output yet
+    String expectedOutput = "";
+
+    assertEquals(expectedOutput,actualOutput);
+  }
 }
