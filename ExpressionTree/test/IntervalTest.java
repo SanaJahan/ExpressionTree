@@ -223,4 +223,45 @@ public class IntervalTest {
 
   }
 
+  @Test
+  public void biggerExpressionTest() { //with more spaces
+    expr = new Interval("1,2 3,4 4,6 U 3,5 I U");
+    Interval actualOutput = expr.evaluate();
+    Interval expectedOutput = new Interval(1,5);
+
+    assertEquals(expectedOutput,actualOutput);
+  }
+
+  @Test
+  public void treeTestOne() {
+    expr = new Interval("1,2 3,4 U");
+    expr.textTree();
+    String actualOutput = expr.textTree();
+    //Have not given the expected output yet
+    String expectedOutput = "";
+
+    assertEquals(expectedOutput,actualOutput);
+  }
+
+  @Test
+  public void treeTestTwo() {
+    expr = new Interval("1,2 3,4 4,6 U I");
+    expr.textTree();
+    String actualOutput = expr.textTree();
+    //Have not given the expected output yet
+    String expectedOutput = "";
+
+    assertEquals(expectedOutput,actualOutput);
+  }
+
+  @Test
+  public void treeTestThree() {
+    expr = new Interval("1,2 3,4 4,6 U 3,5 I U");
+    expr.textTree();
+    String actualOutput = expr.textTree();
+    //Have not given the expected output yet
+    String expectedOutput = "";
+
+    assertEquals(expectedOutput,actualOutput);
+  }
 }

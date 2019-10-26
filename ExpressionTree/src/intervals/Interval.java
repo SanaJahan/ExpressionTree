@@ -77,6 +77,11 @@ public class Interval extends AbstractExpressionTree implements Intervals{
     return helper.calculateInterval(root);
   }
 
+  @Override
+  public String textTree() {
+    return helper.generateTextTree(root);
+  }
+
   /**
    * Return a string-representation of this interval
    * @return a string of the format start,end
