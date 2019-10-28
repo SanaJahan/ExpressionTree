@@ -12,8 +12,6 @@ import common.TreeNode;
  */
 public class Interval {
   private int start,end;
-  private TreeNode root;
-  public ExpressionTreeHelper helper = new ExpressionTreeHelper();
 
   /**
    * Construct an interval given its start and end values.
