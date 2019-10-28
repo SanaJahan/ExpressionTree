@@ -10,7 +10,7 @@ import common.TreeNode;
  * This class represents a 1-dimensional interval. The interval is
  * characterized by a start and an end, both integral values.
  */
-public class Interval extends AbstractExpressionTree implements Intervals{
+public class Interval {
   private int start,end;
   private TreeNode root;
   public ExpressionTreeHelper helper = new ExpressionTreeHelper();
@@ -27,15 +27,6 @@ public class Interval extends AbstractExpressionTree implements Intervals{
     }
     this.start = start;
     this.end = end;
-  }
-
-  /**
-   * This is the constructor that takes the postfix expression as a string,
-   * parses it and constructs the Interval Tree.
-   * @param postfixExpr The postfix expression taken as a string.
-   */
-  public Interval(String postfixExpr) throws IllegalArgumentException {
-      root = super.constructTree(postfixExpr);
   }
 
 
@@ -68,24 +59,7 @@ public class Interval extends AbstractExpressionTree implements Intervals{
             other.end));
   }
 
-  /**
-   * Evaluate this expression of intervals and return the resulting interval.
-   * @return the result as an Interval object
-   */
-  @Override
-  public Interval evaluate() {
-    return helper.calculateInterval(root);
-  }
 
-  @Override
-  public String textTree() {
-    return helper.generateTextTree(root);
-  }
-
-  /**
-   * Return a string-representation of this interval
-   * @return a string of the format start,end
-   */
   public String toString() {
     return ""+start+","+end;
   }
