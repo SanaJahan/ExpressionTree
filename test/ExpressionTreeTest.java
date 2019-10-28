@@ -75,7 +75,7 @@ public class ExpressionTreeTest {
     postfixExpr = new ExpressionTree(" 3    5   + 4 - ");
 
     assertEquals(4.0,postfixExpr.evaluate(),6);
-    String expected = "( 4 - ( 5 + 3 ) )";
+    String expected = "( ( 3 + 5 ) - 4 )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
@@ -88,7 +88,7 @@ public class ExpressionTreeTest {
   public void shouldHandlePostfixExprWithOneOperatorTwoOperand() {
     postfixExpr = new ExpressionTree("2 5 + ");
 
-    String expected = "( 5 + 2 )";
+    String expected = "( 2 + 5 )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
@@ -119,7 +119,7 @@ public class ExpressionTreeTest {
     assertEquals(schemeExpr,postfixExpr.schemeExpression());
 
     //infix expression
-    String expected = "( -4.5 + ( 5.4 * 1.2 ) )";
+    String expected = "( ( 1.2 * 5.4 ) + -4.5 )";
     assertEquals(expected, postfixExpr.infix());
 
     //evaluate postfix expression
@@ -133,7 +133,7 @@ public class ExpressionTreeTest {
 
     assertEquals(3.0, postfixExpr.evaluate(),0);
 
-    String expected = "( 6 / ( 2 * ( 5 + 4 ) ) )";
+    String expected = "( ( ( 4 + 5 ) * 2 ) / 6 )";
     assertEquals(expected, postfixExpr.infix());
 
     // scheme expression
@@ -164,6 +164,21 @@ public class ExpressionTreeTest {
     postfixExpr.infix();
   }
 
+  @Test
+  public void testExpressionDividedByZero() {
+    postfixExpr = new ExpressionTree("2 0 /");
+    double s = postfixExpr.evaluate();
+    assertEquals(Double.POSITIVE_INFINITY, s, 6);
 
+    postfixExpr = new ExpressionTree("-2 0 /");
+    double p = postfixExpr.evaluate();
+    assertEquals(Double.NEGATIVE_INFINITY, p, 6);
+  }
+
+  @Test
+  public void testEvaluateMethodWithTwoOperands() {
+    postfixExpr = new ExpressionTree("0.746050234810243 359843368178131 + 0.7 *");
+    assertEquals("( ( 0.746050234810243 + 359843368178131 ) * 0.7 )",postfixExpr.infix());
+  }
 
 }

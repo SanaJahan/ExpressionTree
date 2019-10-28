@@ -30,12 +30,19 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
     }
   }
 
-
+  /**
+   * method to evaluate an expression tree.
+   * @return the evaluated expression.
+   */
   @Override
   public double evaluate() {
     return helper.calculate(root);
   }
 
+  /**
+   * method to show the infix version of an expression tree.
+   * @return the infix expression.
+   */
   @Override
   public String infix() {
     List<String> infixExpr = new ArrayList<>();
@@ -45,6 +52,10 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
             .replace("]", "");
   }
 
+  /**
+   * method to traverse the tree in preorder.
+   * @return the scheme expression of an expression tree.
+   */
   @Override
   public String schemeExpression() {
     List<String> prefixExpr = new ArrayList<>();
@@ -55,6 +66,10 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
             .replace(" )", ")");
   }
 
+  /**
+   * method to implement the texttree.
+   * @return the texttree version of expression tree.
+   */
   @Override
   public String textTree() {
     return helper.generateTextTree(root);

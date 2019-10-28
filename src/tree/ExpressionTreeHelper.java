@@ -80,7 +80,7 @@ public class ExpressionTreeHelper extends AbstractExpressionTree {
     }
 
     /* first recur on right child */
-    inOrder(root.right,infixExpr);
+    inOrder(root.left,infixExpr);
 
 
     /* then print the data of node */
@@ -88,7 +88,7 @@ public class ExpressionTreeHelper extends AbstractExpressionTree {
 
 
     /* now recur on left child */
-    inOrder(root.left,infixExpr);
+    inOrder(root.right,infixExpr);
 
     if (!(root.left == null && root.right == null)) {
       infixExpr.add(")");

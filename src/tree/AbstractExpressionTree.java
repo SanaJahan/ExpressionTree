@@ -7,11 +7,11 @@ import java.util.Stack;
  * Expression Tree implementations.
  */
 public class AbstractExpressionTree {
-  ExpressionTreeHelper helper;
 
   protected TreeNode postOrderTraversal(String postfixExpr) {
 
     try {
+      ExpressionTreeHelper helper;
       Stack<TreeNode> stack = new Stack();
       TreeNode node;
       TreeNode leftNode;
