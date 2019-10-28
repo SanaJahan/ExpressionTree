@@ -56,13 +56,14 @@ public class IntervalTest {
   @Test
   public void singleInterval() {
     expr = new IntervalTree("1,4");
+    expr.evaluate();
     Interval actualOutput = expr.evaluate();
     Interval expectedOutput = new Interval(1,4);
 
     assertEquals(expectedOutput,actualOutput);
   }
 
-  @Test //This returns the latest interval
+  @Test (expected = IllegalArgumentException.class)
   public void doubleInterval() {
     expr = new IntervalTree("1,4 2,5");
     Interval actualOutput = expr.evaluate();
@@ -85,7 +86,7 @@ public class IntervalTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void multipleIntervalsWithNoOperator() { //doubt with this one, make more multiples
-    expr = new IntervalTree("4,1 2,1");
+    expr = new IntervalTree("1,4 1,3");
     expr.evaluate();
   }
 
@@ -101,7 +102,7 @@ public class IntervalTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void multipleIntervalsWithTooManyOperators() {
-    expr = new IntervalTree("4,1 2,1 I U");
+    expr = new IntervalTree("1,4 0,1 I U");
     expr.evaluate();
   }
 

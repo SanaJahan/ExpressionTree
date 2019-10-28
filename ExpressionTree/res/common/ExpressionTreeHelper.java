@@ -128,7 +128,7 @@ public class ExpressionTreeHelper extends AbstractExpressionTree {
       return new Interval(0, 0);
     }
     // leaf node i.e, an integer
-    if ((root.left == null && root.right == null) || root.value != "I" || root.value != "U") {
+    if ((root.left == null && root.right == null)) {
       parse = root.value.split(",");
       if (parse.length == 2) {
         start = Integer.parseInt(parse[0]);

@@ -6,7 +6,6 @@ public class AbstractExpressionTree {
   ExpressionTreeHelper helper;
 
   protected TreeNode constructTree(String postfixExpr) {
-
     try {
       Stack<TreeNode> stack = new Stack();
       TreeNode node, leftNode, rightNode;
