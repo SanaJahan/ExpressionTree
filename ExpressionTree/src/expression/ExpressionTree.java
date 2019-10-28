@@ -55,9 +55,15 @@ public class ExpressionTree extends AbstractExpressionTree implements Expression
             .replace(" )", ")");
   }
 
+  @Override
+  public String textTree() {
+    return helper.generateTextTree(root);
+  }
+
   private Collection<String> getInfixExprList(List list) {
     return Collections.singleton(Arrays.asList(list).stream()
             .map(Object::toString)
             .collect(Collectors.joining(" ")).replace(",", ""));
   }
+
 }

@@ -141,6 +141,28 @@ public class ExpressionTreeTest {
 
   }
 
+  @Test
+  public void treeTestThree() {
+    postfixExpr = new ExpressionTree("2 3 +");
+    postfixExpr.textTree();
+    String actualOutput = postfixExpr.textTree();
+    //Have not given the expected output yet
+    String expectedOutput = "+\n" +
+            "|\n" +
+            "|\n" +
+            "|___2\n" +
+            "|\n" +
+            "|___3";
+
+    assertEquals(expectedOutput,actualOutput);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testTreeWithOneOperand() {
+    postfixExpr = new ExpressionTree("2 3");
+    postfixExpr.infix();
+  }
+
 
 
 }

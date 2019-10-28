@@ -154,4 +154,20 @@ public class ExpressionTreeHelper extends AbstractExpressionTree {
         throw new IllegalArgumentException();
     }
   }
+
+  public String generateTextTree(TreeNode root) {
+    String tree;
+    String branch1 = "\n" + "|" + "\n" + "|" + "\n" + "|___";
+    String branch2 = "\n" + "|" + "\n" + "|___";
+    if (root == null) {
+      return "Null";
+    }
+    // leaf node i.e, an integer
+    if (root.left == null && root.right == null) {
+      return root.value;
+    }
+
+    tree = root.value + branch1 + generateTextTree(root.left) + branch2 + generateTextTree(root.right);
+    return tree;
+  }
 }
