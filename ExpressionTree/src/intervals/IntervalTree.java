@@ -14,7 +14,8 @@ public class IntervalTree extends AbstractExpressionTree implements Intervals {
    * @param postfixExpr The postfix expression taken as a string.
    */
   public IntervalTree(String postfixExpr) throws IllegalArgumentException {
-    root = super.constructTree(postfixExpr);
+      root = super.postOrderTraversal(postfixExpr);
+
   }
 
   /**

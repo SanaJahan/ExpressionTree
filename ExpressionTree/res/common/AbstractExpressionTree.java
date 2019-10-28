@@ -5,7 +5,7 @@ import java.util.Stack;
 public class AbstractExpressionTree {
   ExpressionTreeHelper helper;
 
-  protected TreeNode constructTree(String postfixExpr) {
+  protected TreeNode postOrderTraversal(String postfixExpr) {
     try {
       Stack<TreeNode> stack = new Stack();
       TreeNode node, leftNode, rightNode;
@@ -36,7 +36,9 @@ public class AbstractExpressionTree {
       }
       node = stack.peek();
       stack.pop();
-
+      if(!stack.isEmpty()){
+        throw new IllegalArgumentException("Invalid expression");
+      }
       return node;
     }
     catch (Exception e) {
